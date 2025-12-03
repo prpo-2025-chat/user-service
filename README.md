@@ -1,7 +1,11 @@
 # user-service
 ### Docker
-in user-service run:
+in user-service run:\
 `docker build -t user-service .`
 
-and then:
+`docker compose up --build`
+
+
+Zastarelo:\
+and then:\
 `docker run -p 8080:8080 user-service`
