@@ -41,7 +41,7 @@ public class User {
 
   public enum Theme {
     DARK,
-    LIGHT;
+    LIGHT
   }
 
 }

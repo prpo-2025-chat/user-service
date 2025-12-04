@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackages = "com.prpo.chat.service.repository")
 public class App {
 
-  public static void main(String[] args) {
+  public static void main(final String[] args) {
     SpringApplication.run(App.class, args);
   }
 }

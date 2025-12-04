@@ -24,7 +24,7 @@ public class UserController {
   public ResponseEntity<User> createUser(
       @Valid @RequestBody final CreateUserRequestDto request
   ) {
-    User createdUser = userService.createUser(request);
+    final var createdUser = userService.createUser(request);
     return ResponseEntity.ok(createdUser);
   }
 }
