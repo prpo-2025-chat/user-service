@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -21,13 +22,15 @@ public class User {
   private Settings settings;
 
   private List<String> friends; // list of user ids
+  private List<String> servers;
+  private List<String> privateServers;
 
   @Data
   public static class Profile {
     private String avatarUrl;
     private String bio;
     private String location;
-    private String birthdate;
+    private Date birthdate;
   }
 
   @Data

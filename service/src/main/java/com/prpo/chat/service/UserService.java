@@ -24,20 +24,30 @@ public class UserService {
     }
 
     // main info
-    User user = new User();
+    final var user = new User();
     user.setUsername(request.getUsername());
     user.setEmail(request.getEmail());
     // TODO: call authentication service
     user.setPasswordHash(request.getPassword());
 
+    // profile
+    final var profile = new User.Profile();
+    user.setProfile(profile);
+    profile.setBio("");
+    profile.setLocation(null);
+    profile.setBirthdate(null);
+    profile.setAvatarUrl("https://example.com/avatar.jpg");
 
     // default settings
-    final User.Settings settings = new User.Settings();
+    final var settings = new User.Settings();
+    user.setSettings(settings);
     settings.setTheme(User.Theme.DARK);
     settings.setNotifications(true);
 
-    //friends
+    //friends, servers, privateServers
     user.setFriends(List.of());
+    user.setServers(List.of());
+    user.setPrivateServers(List.of());
 
     return userRepository.save(user);
   }

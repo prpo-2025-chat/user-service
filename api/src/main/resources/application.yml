@@ -5,5 +5,5 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://nbAdaran:123@users.rmpyjrs.mongodb.net/users?appName=users
+      uri: mongodb+srv://nbAdaran:123@users.rmpyjrs.mongodb.net/users-db?appName=users
 
