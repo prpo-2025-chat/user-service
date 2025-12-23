@@ -32,7 +32,8 @@ public class UserController {
   )
   @ApiResponses({
           @ApiResponse(responseCode = "201", description = "User registered successfully."),
-          @ApiResponse(responseCode = "409", description = "User already exists.")
+          @ApiResponse(responseCode = "409", description = "User already exists."),
+          @ApiResponse(responseCode = "500", description = "Failed to encrypt password.")
   })
   @PostMapping("/register")
   public ResponseEntity<UserDto> registerUser(
@@ -47,8 +48,9 @@ public class UserController {
   )
   @ApiResponses({
           @ApiResponse(responseCode = "200", description = "Login successfull."),
-          @ApiResponse(responseCode = "403", description = "Wrong password"),
+          @ApiResponse(responseCode = "403", description = "Password incorrect"),
           @ApiResponse(responseCode = "404", description = "User not found"),
+          @ApiResponse(responseCode = "500", description = "Failed to validate password")
   })
   @PostMapping("/login")
   public ResponseEntity<UserDto> login(
