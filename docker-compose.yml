@@ -3,6 +3,6 @@ services:
     image: user-service:latest
     container_name: user-service
     ports:
-      - "8080:8080"
+      - "8032:8032"
     environment:
       MONGO_URI: ${MONGO_URI}
