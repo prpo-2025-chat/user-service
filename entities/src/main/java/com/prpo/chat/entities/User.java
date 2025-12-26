@@ -24,6 +24,7 @@ public class User {
   private Settings settings;
 
   private List<String> friends; // list of user ids
+  private List<String> pendingFriendshipRequests;
 
   @Data
   public static class Profile {
