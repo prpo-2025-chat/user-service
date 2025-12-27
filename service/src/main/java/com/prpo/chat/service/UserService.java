@@ -1,17 +1,27 @@
 package com.prpo.chat.service;
 
-import com.prpo.chat.entities.User;
-import com.prpo.chat.service.dtos.*;
-import com.prpo.chat.service.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.prpo.chat.entities.User;
+import com.prpo.chat.service.clients.SearchClient;
+import com.prpo.chat.service.dtos.FriendshipRequestDto;
+import com.prpo.chat.service.dtos.IndexUserRequestDto;
+import com.prpo.chat.service.dtos.LoginRequestDto;
+import com.prpo.chat.service.dtos.PasswordHashDto;
+import com.prpo.chat.service.dtos.PasswordRequestDto;
+import com.prpo.chat.service.dtos.RegisterRequestDto;
+import com.prpo.chat.service.dtos.UserDto;
+import com.prpo.chat.service.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +32,8 @@ public class UserService {
     private final RestTemplate restTemplate;
 
     private final String ENCRYPTION_SERVICE_URL = "http://localhost:8082/password";
+
+    private final SearchClient searchClient;
 
     /**
      * Fetches user by id.
@@ -94,6 +106,7 @@ public class UserService {
      * @param request email, username(min 5, max 24) and password(min 8, max 128)
      * @return
      */
+    @Transactional
     public UserDto registerUser(final RegisterRequestDto request) {
         // TODO: use mappers
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -133,6 +146,13 @@ public class UserService {
         user.setFriends(List.of());
 
         user = userRepository.save(user);
+
+        final var indexUser = new IndexUserRequestDto();
+        indexUser.setId(user.getId());
+        indexUser.setUsername(user.getUsername());
+
+        searchClient.indexUser(indexUser);
+
         final var userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());

@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class IndexUserRequestDto {
     @NotBlank
-    private String userId;
+    private String id;
 
     @NotBlank
     private String username;

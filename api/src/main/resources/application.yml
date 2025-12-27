@@ -9,5 +9,10 @@ server:
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://nbAdaran:123@users.rmpyjrs.mongodb.net/users-db?appName=users
+      # uri: mongodb+srv://nbAdaran:123@users.rmpyjrs.mongodb.net/users-db?appName=users
+      uri: ${MONGO_URI:mongodb://localhost:27018/users}
 
+
+search:
+  service:
+    base-url: ${SEARCH_SERVICE_BASE_URL:http://localhost:8084/search}
