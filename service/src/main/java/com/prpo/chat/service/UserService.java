@@ -16,7 +16,6 @@ import com.prpo.chat.service.dtos.FriendshipRequestDto;
 import com.prpo.chat.service.dtos.IndexUserRequestDto;
 import com.prpo.chat.service.dtos.LoginRequestDto;
 import com.prpo.chat.service.dtos.PasswordHashDto;
-import com.prpo.chat.service.dtos.PasswordRequestDto;
 import com.prpo.chat.service.dtos.RegisterRequestDto;
 import com.prpo.chat.service.dtos.UserDto;
 import com.prpo.chat.service.repository.UserRepository;
@@ -172,7 +171,11 @@ public class UserService {
         final var user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "User not found"));
-
+        
+        if(user.getPasswordHash() == null) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User is registered with MetaMask. Please login with your connected wallet.");
+        }
+        
         final var isCorrect = validatePassword(request.getPassword(), user);
 
         if (isCorrect) {
