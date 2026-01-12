@@ -30,7 +30,7 @@ public class UserService {
 
     private final RestTemplate restTemplate;
 
-    private final String ENCRYPTION_SERVICE_URL = "http://localhost:8082/password";
+    private final String ENCRYPTION_SERVICE_URL = "http://encryption:8082/password";
 
     private final SearchClient searchClient;
 
