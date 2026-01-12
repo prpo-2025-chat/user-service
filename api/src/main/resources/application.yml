@@ -15,7 +15,7 @@ spring:
 
 search:
   service:
-    base-url: ${SEARCH_SERVICE_BASE_URL:http://localhost:8084/search}
+    base-url: ${SEARCH_SERVICE_BASE_URL:http://search:8084/search}
 
 # springdoc:
 #   api-docs:
